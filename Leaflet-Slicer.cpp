@@ -8,11 +8,12 @@
 namespace fs = std::filesystem;
 
 const int TILE_SIZE = 256;
+std::string endFileType = "webp";
 
 static void saveTile(const cv::Mat& tile, int zoom, int x, int y, const std::string& outputDir) {
 	fs::path tilePath = fs::path(outputDir) / std::to_string(zoom) / std::to_string(x);
 	fs::create_directories(tilePath);
-	std::string filename = (tilePath / (std::to_string(y) + ".png")).string();
+	std::string filename = (tilePath / (std::to_string(y) + "." + endFileType)).string();
 	cv::imwrite(filename, tile);
 }
 
@@ -60,7 +61,7 @@ static void processZoomLevel(const cv::Mat& image, int zoom, const std::string& 
 	}
 }
 
-int main(int argc, char** argv) {
+int main() {
 	std::cout << "Image: ";
 	std::string imagePath;
 	std::cin >> imagePath;
@@ -76,6 +77,12 @@ int main(int argc, char** argv) {
 	std::string zoomString;
 	std::cin >> zoomString;
 	int maxZoom = std::stoi(zoomString);
+
+    std::cout << "End File Type: ";
+	std::string newEndFile;
+	std::cin >> newEndFile;
+
+    if (newEndFile.size() == 0) endFileType = newEndFile;
 
 	std::string outputDir = "tiles";
 
