@@ -4,6 +4,7 @@
 #include <vector>
 #include <mutex>
 #include <iostream>
+#include <conio.h>
 
 namespace fs = std::filesystem;
 
@@ -91,6 +92,9 @@ int main() {
 		processZoomLevel(image, i, outputDir);
 	}
 
-	std::cout << "Tiling complete.\n";
+	std::cout << "Tiling complete." << std::endl;
+    std::cout << "Press any key to exit..." << std::endl;
+    
+    _getch(); // Wait for user input before exiting
 	return 0;
 }
